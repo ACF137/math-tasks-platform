@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Решатель задач</title>
+</head>
+<body>
+  <main>
+    <h1>Решатель задач</h1>
+    <nav class="nav">
+      <button aria-selected="true" data-page="tasks">Задания</button>
+      <button aria-selected="false" data-page="solver">Калькулятор</button>
+      <button aria-selected="false" data-page="admin">Учитель</button>
+    </nav>
+
+    <section id="page-solver" hidden>
+      <p class="sub">Вычисляйте выражения, решайте квадратные уравнения и находите производные.</p>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-mode="calc">Выражение</button>
+        <button role="tab" aria-selected="false" data-mode="quad">Квадратное уравнение</button>
+        <button role="tab" aria-selected="false" data-mode="der">Производная</button>
+      </div>
+      <div class="panel">
+        <div id="form-calc">
+          <label for="expr">Выражение</label>
+          <input id="expr" placeholder="2*(3+4)^2 / sqrt(16)" autocomplete="off" />
+        </div>
+        <div id="form-quad" hidden>
+          <p class="hint">ax² + bx + c = 0</p>
+          <div class="row">
+            <div><label for="qa">a</label><input id="qa" inputmode="decimal" placeholder="1" /></div>
+            <div><label for="qb">b</label><input id="qb" inputmode="decimal" placeholder="-3" /></div>
+            <div><label for="qc">c</label><input id="qc" inputmode="decimal" placeholder="2" /></div>
+          </div>
+        </div>
+        <div id="form-der" hidden>
+          <div class="row">
+            <div class="grow3"><label for="fn">Функция f(x)</label><input id="fn" placeholder="x^3 + sin(x)" autocomplete="off" /></div>
+            <div><label for="variable">Переменная</label><input id="variable" value="x" /></div>
+          </div>
+        </div>
+        <button id="solve" class="go">Решить</button>
+        <div id="output" role="status" hidden></div>
+      </div>
+      <h2>История</h2>
+      <ul id="history"></ul>
+    </section>
+
+    <section id="page-tasks">
+      <div id="stats" class="hint"></div>
+      <div id="task-box"></div>
+    </section>
+
+    <section id="page-admin" hidden>
+      <div id="admin-lock" class="panel">
+        <label for="pin">Пароль учителя</label>
+        <input id="pin" type="password" autocomplete="off" />
+        <button id="pin-go" class="go">Войти</button>
+        <div id="pin-msg" class="msg"></div>
+      </div>
+
+      <div id="admin-panel" hidden>
+        <div class="panel">
+          <label for="t-img">Условие — картинка (PNG)</label>
+          <input id="t-img" type="file" accept="image/*" />
+          <img id="t-img-prev" class="pic prev" alt="Предпросмотр условия" hidden />
+          <label for="t-title" class="gap">Условие — текст (необязательно)</label>
+          <textarea id="t-title" rows="2" placeholder="Например: найдите x"></textarea>
+          <label for="t-answer" class="gap">Правильный ответ</label>
+          <input id="t-answer" placeholder="4" autocomplete="off" />
+          <p class="hint">Несколько ответов — через «;», порядок не важен. Можно писать 1/2 или 0,5.</p>
+          <label for="t-expl" class="gap">Решение — текст</label>
+          <textarea id="t-expl" rows="4" placeholder="Как решается: 2x + 3 = 11, 2x = 8, x = 4."></textarea>
+          <label for="t-expl-img" class="gap">Решение — картинка (PNG, необязательно)</label>
+          <input id="t-expl-img" type="file" accept="image/*" />
+          <img id="t-expl-img-prev" class="pic prev" alt="Предпросмотр решения" hidden />
+          <button id="t-add" class="go">Добавить в общий список</button>
+          <div id="t-msg" class="msg" role="status"></div>
+        </div>
+
+        <h2>Все задания (<span id="t-count">0</span>)</h2>
+        <ul id="admin-list"></ul>
+        <div class="task-row"><button id="admin-exit" class="ghost">Выйти</button></div>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
