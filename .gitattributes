@@ -1,1 +1,5 @@
+# Generated frontend
 dist/** linguist-generated=true
+
+# Generated server bundle
+server/checker.cjs linguist-generated=true
